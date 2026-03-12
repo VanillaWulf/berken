@@ -1,3 +1,5 @@
+"use strict";
+
 const sliderState = {};
 
 function initSlider(cardId, slideIndex = 1) {

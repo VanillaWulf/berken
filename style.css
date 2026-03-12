@@ -5,7 +5,7 @@ Description: berken theme
 */
 
 
-/* Reset and base styles */
+/* Reset and base styles update*/
 * {
     margin: 0;
     padding: 0;
@@ -32,6 +32,11 @@ body {
     padding: 0 15px;
 }
 
+.visually-hidden {
+    position: fixed;
+    transform: scale(0);
+}
+
 /* Page header */
 .page-header {
     background-color: #f5f5f5;
@@ -48,42 +53,6 @@ body {
 .catalog-seo {
     padding: 40px 0;
     background-color: #f9f9f9;
-}
-
-.seo-content {
-    max-width: 900px;
-    margin: 0 auto;
-}
-
-.seo-content h2 {
-    color: #8B4513;
-    margin-bottom: 20px;
-    font-size: 1.8rem;
-}
-
-.seo-content h3 {
-    color: #8B4513;
-    margin: 25px 0 15px 0;
-    font-size: 1.3rem;
-}
-
-.seo-content p {
-    margin-bottom: 15px;
-    line-height: 1.7;
-}
-
-.seo-content ul {
-    padding-left: 20px;
-    margin-bottom: 20px;
-}
-
-.seo-content li {
-    margin-bottom: 10px;
-    line-height: 1.6;
-}
-
-.seo-content strong {
-    color: #8B4513;
 }
 
 /* Btn  + general */
@@ -113,6 +82,11 @@ body {
 .btn-big {
     display: block;
     width: 50%;
+}
+
+.btn-full {
+    display: block;
+    width: 100%;
 }
 
 .btn-primary:hover,
@@ -166,28 +140,16 @@ body {
     padding: 15px 0;
 }
 
-/*пересмотреть эти стили для лого */
+/*стили для лого */
 
 .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: #8B4513;
     text-decoration: none;
-    position: relative;
     display: flex;
     align-items: center;
 }
 
-.logo::before {
-    content: "";
-    position: absolute;
-    top: -10px;
-    left: -10px;
-    width: 40px;
-    height: 40px;
-    background-color: #8B4513;
-    border-radius: 50%;
-    z-index: -1;
+.logo img {
+    width: 150px;
 }
 
 .nav-list {
@@ -247,13 +209,30 @@ main {
 }
 
 .hero {
-    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://placehold.co/1200x600/8B4513/FFFFFF?text=BERKEM') no-repeat center center/cover;
+    background-color: #2b200b;
+    background-size: cover;
+    background-repeat: no-repeat;
     height: 80vh;
     display: flex;
     align-items: center;
     text-align: center;
     color: white;
     margin-bottom: 40px;
+    position: relative;
+}
+
+.hero::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
 }
 
 .hero-title {
@@ -382,49 +361,6 @@ main {
 .popular-products-wrp {
     margin-bottom: 40px;
 }
-
-/*
-.popular-products-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-}
-
-.popular-products-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    overflow: hidden;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: #fff;
-    text-decoration: none;
-    color: inherit;
-    padding-bottom: 15px;
-}
-
-.popular-products-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-
-.popular-products-img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-}
-
-.popular-products-title {
-    padding: 15px;
-    color: #333;
-    font-size: 1.2rem;
-    margin: 0;
-}
-
-.popular-products-desc {
-    padding: 0 15px 15px;
-    color: #666;
-    font-size: 0.9rem;
-} */
 
 .product-card {
     border: 1px solid #ddd;
@@ -641,7 +577,7 @@ main {
 
 .furniture-card img {
     width: 100%;
-    height: 250px;
+    height: 550px;
     object-fit: cover;
 }
 
@@ -677,6 +613,7 @@ main {
 }
 
 /* About page */
+
 .about-content {
     display: grid;
     grid-template-columns: 2fr 1fr;
@@ -684,32 +621,39 @@ main {
     padding: 40px 0;
 }
 
-.about-text h2 {
-    color: #8B4513;
-    margin-bottom: 20px;
-}
-
-.about-text p {
-    margin-bottom: 15px;
-    line-height: 1.6;
-}
-
 .company-values {
     margin-top: 20px;
 }
 
-.company-values ul {
+.about-image img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+/* text */
+
+.text h2 {
+    color: #8B4513;
+    margin-bottom: 20px;
+}
+
+.text p {
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.text ul {
     list-style: none;
     padding-left: 0;
 }
 
-.company-values li {
+.text li {
     padding: 5px 0;
     position: relative;
     padding-left: 20px;
 }
 
-.company-values li::before {
+.text li::before {
     content: "•";
     color: #8B4513;
     font-size: 1.5rem;
@@ -718,10 +662,6 @@ main {
     top: 0;
 }
 
-.about-image img {
-    width: 100%;
-    border-radius: 8px;
-}
 
 /* Contact page */
 .contact-content {
@@ -873,6 +813,14 @@ textarea:focus {
     gap: 10px;
     font-size: 14px;
     color: #666;
+    min-height: 70px;
+    position: relative;
+}
+
+.checkbox-label .wpcf7-not-valid-tip {
+   position: absolute;
+   bottom: -50px;
+   width: 260px;
 }
 
 .checkbox-label input[type="checkbox"] {
@@ -889,6 +837,7 @@ textarea:focus {
     text-decoration: none;
 }
 
+
 /* Examples list page */
 .examples-list {
     padding: 40px 0;
@@ -900,6 +849,10 @@ textarea:focus {
     gap: 40px;
     max-width: 900px;
     margin: 0 auto;
+}
+
+.main-work-list {
+    margin-bottom: 50px;
 }
 
 .work-card {
@@ -916,13 +869,16 @@ textarea:focus {
     position: relative;
     width: 500px;
     flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .slider-images {
     position: relative;
     width: 100%;
-    height: 400px;
+    /* height: 400px; */
     overflow: hidden;
+    flex-grow: 1;
 }
 
 .slider-img {
@@ -1029,6 +985,54 @@ textarea:focus {
     max-width: 900px;
     margin: 0 auto;
 }
+
+ /* Modal styles */
+ .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-title {
+    margin-bottom: 30px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 30px;
+    border: none;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 500px;
+    position: relative;
+}
+
+.close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #8B4513;
+}
+
+.order-furnitre-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
 
 /* Responsive design */
 @media (max-width: 1030px) {

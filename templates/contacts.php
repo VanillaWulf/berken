@@ -21,7 +21,7 @@
                         <?php
                             $settings=get_posts( array(
                                 'numberposts'=> 1, 
-                                'category_name'=>'settings', // название рубрики на английском
+                                'category_name'=>'settings',
                                 'post_type'   =>'post',
                             ) );
                             foreach($settings as $post ) {

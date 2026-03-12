@@ -15,24 +15,9 @@
 
         <section class="about-company">
             <div class="container">
-                <div class="about-content">
+                <div class="about-content text">
                     <div class="about-text">
                         <?php the_content();?>  
-
-                              
-                        <div class="company-values">
-                            <h3>Наши ценности:</h3>
-                            <ul>
-                                <?php 
-                                    $loop = CFS()->get('value_list');    
-                                    foreach($loop as $row){
-                                        ?>
-                                        <li><?= $row['value_text']?></li>
-                                    <?php 
-                                }
-                                ?>
-                            </ul>
-                        </div>
                     </div>
                     
                     

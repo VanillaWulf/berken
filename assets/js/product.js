@@ -1,3 +1,5 @@
+"use strict"
+
 function changeImage(element) {
   const mainImage = document.querySelector('#main-image');
   mainImage.src = element.src.replace('100x80', '600x400');

@@ -9,10 +9,19 @@
 <body>
     <header class="header">
         <div class="container">
+            <?php 
+
+				$settings=get_posts( array(
+					'numberposts'=> 1, 
+					'category_name'=>'settings', 
+					'post_type'   =>'post',
+				) );
+            ?>
             <div class="header-content menu">
                <a href="<?= home_url(); ?>" class="logo">
-                logo
-                  <!-- <img src="./assets/images/logo.png" alt="logo"> logo -->
+               <?php foreach($settings as $post ) { ?>
+                 <img src="<?= CFS() -> get('logo')?>" alt="logo">
+                <?php } ?>
               </a>
 
                 <nav class="nav">
@@ -28,11 +37,6 @@
                 
                 <div class="header-contact">
                     <?php
-							$settings=get_posts( array(
-								'numberposts'=> 1, 
-								'category_name'=>'settings', // название рубрики на английском
-								'post_type'   =>'post',
-							) );
 							foreach($settings as $post ) {
 								?>
 									<a href="tel:<?= CFS() -> get('tel_link')?>" class="phone-link"><?= CFS() -> get('tel_text')?></a>

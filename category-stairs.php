@@ -7,15 +7,15 @@
     <main>
         <section class="page-header">
             <div class="container">
-                <h1><?php the_title();?></h1>
+                <h1>Лестницы</h1>
             </div>
         </section>
 
         <section class="filters">
             <div class="container">
                 <div class="filter-buttons">
-                    <button class="filter-btn" type="button" data-sort="order:asc">По возрастанию</button>
-                    <button class="filter-btn" type="button" data-sort="order:desc">По убыванию</button>
+                    <button class="filter-btn" type="button" data-sort="order:asc">По возрастанию цены</button>
+                    <button class="filter-btn" type="button" data-sort="order:desc">По убыванию цены</button>
                   </div>
             </div>
         </section>
@@ -27,11 +27,11 @@
 
                         if ( have_posts() ){
                         while ( have_posts()){
-                            the_post(); // получем доступ к посту
-                            $all_category = get_the_category(); // получаем категорию
-                            $res_name = ''; // флаг категории
+                            the_post(); 
+                            $all_category = get_the_category(); 
+                            $res_name = ''; 
                             foreach( $all_category as $category ) {
-                            // проверка категории по id
+                     
                             if($category-> term_id == 6 || $category-> term_id == 7 || $category-> term_id == 8) {
                                 $res_name = $category->slug;
                             }

@@ -6,8 +6,8 @@
 ?>
     <main>
         <!-- Hero Section -->
-        <section class="hero">
-            <div class="container">
+        <section class="hero" style="background-image: url(<?=CFS()->get('hero_bkg') ?>);">
+            <div class="container hero-content">
                 <h1 class="hero-title"><?= CFS()->get('hero_title')?></h1>
                 <p class="hero-subtitle"><?= CFS()->get('hero_text')?></p>
                 <a class="btn btn-primary" href="#call">Заказать звонок</a>
@@ -23,7 +23,7 @@
 
                     <?php
                         $popular_posts = get_posts(array(
-                            'category' => 10, // или 'popular' (slug)
+                            'category' => 10, 
                             'numberposts' => 12,
                             'post_status' => 'publish'
                         ));
@@ -53,32 +53,6 @@
         </section>
       
 
-        <!-- Advantages Section -->
-        <section class="advantages">
-            <div class="container">
-                <h2 class="section-title">Наши преимущества</h2>
-                <div class="advantages-grid">
-
-                <?php 
-                    $loop = CFS()->get('adv_list');    
-                    foreach($loop as $row){
-                        ?>
-                        <div class="advantage-card">
-                            <img class="advantage-icon" src="<?= $row['adv_img']?>" 
-                            alt="<?= get_post_meta(attachment_url_to_postid($row['adv_img']), '_wp_attachment_image_alt', true)?>">
-                          
-
-                            <h3 class="advantage-title"><?= $row['adv_title']?></h3>
-                            <p class="advantage-desc"><?= $row['adv_text']?></p>
-                        </div>
-                        <?php 
-                    }
-  
-                ?>
-                </div>
-            </div>
-        </section>
-
         <!-- Stages Section -->
         <section class="stages">
             <div class="container">
@@ -104,19 +78,139 @@
             </div>
         </section>
 
+        <!-- Example section -->
+
+        <section class="examples-list">
+            <div class="container">
+                <h2 class="section-title">Примеры работ</h2>
+
+                <div class="works-list main-work-list">
+
+                <?php
+
+                    $posts=get_posts( array(
+                    'numberposts'=>3, 
+                    'category_name'=>'examples',
+                    'orderby'     =>'title', 
+                    'order'       =>'ASC', 
+                    'post_type'   =>'post',
+                    'suppress_filters'=>true,
+
+                    ) );
+                    
+                    $counter = 1;  
+                    
+                    foreach( $posts as $post ){
+
+                        setup_postdata($post);
+
+                            ?>
+                            <div class="work-card" data-card-id="<?= $counter?>">
+                                <div class="card-slider">
+                                     <div class="slider-images">
+                                     <?php 
+                                        $img_loop =  CFS()->get('example_img_loop');
+                                        foreach($img_loop as $index => $img_row){
+                                            $active_class = $index === 0 ? 'active' : '';
+                                            ?>
+                                            <img class="slider-img <?= $active_class ?>"
+                                                onclick="slideNext(<?= $counter?>)" 
+                                                src="<?= $img_row['example_img'] ?>" 
+                                                alt="<?= get_post_meta(attachment_url_to_postid($img_row['example_img']), '_wp_attachment_image_alt', true) ?>">
+                                        <?php
+                                        }
+
+
+                                    ?>
+                                    </div>
+                                    <?php if(count($img_loop) > 1) {?>
+                                        <button class="slider-btn prev" onclick="slidePrev(<?= $counter?>)">&#10094;</button>
+                                        <button class="slider-btn next" onclick="slideNext(<?= $counter?>)">&#10095;</button>
+                                        <div class="slider-dots">
+                                            <?php 
+                                                foreach($img_loop as $index => $slide_row){ 
+                                                    $active_class = $index === 0 ? 'active' : '';
+                                                    ?>
+                                                
+                                                    <span class="dot <?= $active_class ?>" onclick="goToSlide(<?= $counter?>, <?=$index?>)"></span>
+                                                    <?php
+                                                }
+                                            ?>
+                                        </div>
+                                    <?php 
+                                        }
+                                    ?>
+                                </div>
+                                <div class="card-info">
+                                    <h3><?php the_title(); ?></h3>
+                                    <div class="card-description"><?php the_content(); ?></div>
+                                    <?php if(!empty( CFS()->get('example_price'))) {
+                                        ?>
+                                         <p class="card-price">цена <?= CFS()->get('example_price') ?></p>
+                                        <?php 
+                                    }?>
+                                    <!-- <a class="btn btn-primary" href="#call">Заказать</a> -->
+                                </div>
+                             </div>   
+
+
+
+                            <?php
+                            $counter++;
+                        }
+                    wp_reset_postdata();
+
+                    ?> 
+                </div>
+                <a class="btn btn-primary btn-center btn-big" href="<?= home_url('/primery-rabot') ?>">Еще примеры</a>
+           
+            </div>
+        </section>
+
+                <!-- About Section -->
+                <section class="advantages">
+            <div class="container">
+                <h2 class="section-title">Наши преимущества</h2>
+                <div class="advantages-grid">
+
+                <?php 
+                    $loop = CFS()->get('adv_list');    
+                    foreach($loop as $row){
+                        ?>
+                        <div class="advantage-card">
+                            <img class="advantage-icon" src="<?= $row['adv_img']?>" 
+                            alt="<?= get_post_meta(attachment_url_to_postid($row['adv_img']), '_wp_attachment_image_alt', true)?>">
+                          
+
+                            <h3 class="advantage-title"><?= $row['adv_title']?></h3>
+                            <p class="advantage-desc"><?= $row['adv_text']?></p>
+                        </div>
+                        <?php 
+                    }
+  
+                ?>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- About section -->
+        <section class="about-company">
+            <div class="container">
+                <h2 class="section-title">О компании</h2>
+                <div class="text">
+                    <?php the_content();?>              
+                </div>
+            </div>
+        </section>
+
         <!-- Callback Form -->
         <section class="callback" id="call">
+           
+
             <div class="container">
                 <h2 class="section-title">Закажите обратный звонок</h2>
-                <form class="callback-form">
-                    <input type="text" placeholder="Ваше имя" required>
-                    <input type="tel" placeholder="Ваш телефон" required>
-                    <label class="checkbox-label">
-                        <input type="checkbox" required>
-                        <span>Я согласен на <a href="personal-data.html" target="_blank">обработку персональных данных</a> в соответствии с <a href="privacy.html" target="_blank">политикой конфиденциальности</a></span>
-                    </label>
-                    <button type="submit" class="btn btn-primary">Заказать консультацию</button>
-                </form>
+                <?= do_shortcode('[contact-form-7 id="54a05e0" title="call-form" html_class="callback-form"]') ?>
             </div>
         </section>
     </main>
